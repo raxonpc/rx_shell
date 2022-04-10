@@ -1,5 +1,6 @@
 #include "rx_loop.h"
 #include "rx_read_line.h"
+#include "rx_split_line.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -13,10 +14,17 @@ void rx_loop(void)
     {
         printf("> ");
         line = rx_read_line();
-
         printf("%s\n", line);
 
+        args = rx_split_line(line);
+        for(char** it = args; *it != NULL; ++it)
+        {
+            printf("%s - ", *it);
+        }
+        putchar('\n');
+
         free(line);
+        free(args);
     }
     while(status);
 }
