@@ -14,15 +14,9 @@ void rx_loop(void)
     do
     {
         printf("> ");
-        line = rx_read_line();
-        printf("%s\n", line);
 
+        line = rx_read_line();
         args = rx_split_line(line);
-        for(char** it = args; *it != NULL; ++it)
-        {
-            printf("%s - ", *it);
-        }
-        putchar('\n');
 
         status = rx_execute(args);
 
